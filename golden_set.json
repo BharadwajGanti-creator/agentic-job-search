@@ -1,0 +1,14 @@
+[
+  { "title": "Senior Software Engineer II, Flywheel Foundations", "company": "HubSpot", "location": "Ireland", "relevant": true },
+  { "title": "Software Development Engineer II - Data and Analytics", "company": "Mastercard", "location": "Ireland", "relevant": true },
+  { "title": "SR Azure Database Engineer", "company": "Mastercard", "location": "Ireland", "relevant": true },
+  { "title": "Software Engineer II in Test (SDET)", "company": "Mastercard", "location": "Ireland", "relevant": false },
+  { "title": "Senior Database Administrator", "company": "Mastercard", "location": "Ireland", "relevant": false },
+  { "title": "Product Applications Engineer", "company": "Analog Devices", "location": "Ireland", "relevant": false },
+  { "title": "Lead, SRE Engineer", "company": "Mastercard", "location": "Ireland", "relevant": false },
+  { "title": "Principal Software Engineer", "company": "Mastercard", "location": "Ireland", "relevant": false },
+  { "title": "Director of Software Engineering", "company": "Mastercard", "location": "Ireland", "relevant": false },
+  { "title": "AI engineer II", "company": "Mastercard", "location": "Ireland", "relevant": false },
+  { "title": "Manager, Software Engineering", "company": "Mastercard", "location": "Ireland", "relevant": false },
+  { "title": "Site Reliability Engineer I-1", "company": "Mastercard", "location": "Ireland", "relevant": false }
+]
