@@ -15,13 +15,11 @@ jobs:
           dotnet-version: '10.0.x'
 
       - name: Write resume profile
-        working-directory: JobSearchAgent        # ← your project folder
         env:
           RESUME_PROFILE_JSON: ${{ secrets.RESUME_PROFILE_JSON }}
         run: printf '%s' "$RESUME_PROFILE_JSON" > resume_profile.json
 
       - name: Run agent
-        working-directory: JobSearchAgent        # ← your project folder
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           JOOBLE_API_KEY: ${{ secrets.JOOBLE_API_KEY }}
@@ -31,6 +29,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add JobSearchAgent/wwwroot/latest_matches.json
+          git add wwwroot/latest_matches.json
           git diff --staged --quiet || git commit -m "Daily matches $(date -u +%F)"
           git push
