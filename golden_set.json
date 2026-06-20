@@ -1,14 +1,226 @@
 [
-  { "title": "Senior Software Engineer II, Flywheel Foundations", "company": "HubSpot", "location": "Ireland", "relevant": true },
-  { "title": "Software Development Engineer II - Data and Analytics", "company": "Mastercard", "location": "Ireland", "relevant": true },
-  { "title": "SR Azure Database Engineer", "company": "Mastercard", "location": "Ireland", "relevant": true },
-  { "title": "Software Engineer II in Test (SDET)", "company": "Mastercard", "location": "Ireland", "relevant": false },
-  { "title": "Senior Database Administrator", "company": "Mastercard", "location": "Ireland", "relevant": false },
-  { "title": "Product Applications Engineer", "company": "Analog Devices", "location": "Ireland", "relevant": false },
-  { "title": "Lead, SRE Engineer", "company": "Mastercard", "location": "Ireland", "relevant": false },
-  { "title": "Principal Software Engineer", "company": "Mastercard", "location": "Ireland", "relevant": false },
-  { "title": "Director of Software Engineering", "company": "Mastercard", "location": "Ireland", "relevant": false },
-  { "title": "AI engineer II", "company": "Mastercard", "location": "Ireland", "relevant": false },
-  { "title": "Manager, Software Engineering", "company": "Mastercard", "location": "Ireland", "relevant": false },
-  { "title": "Site Reliability Engineer I-1", "company": "Mastercard", "location": "Ireland", "relevant": false }
+  {
+    "Title": "Software Engineer II in Test (SDET)",
+    "Company": "Mastercard",
+    "Location": "Ireland",
+    "Snippet": "...to join the Decision Operations team in Dublin. This role blends strong software engineering... ...automation, execution, and reporting. Develop highquality, secure, and testable code... ...understanding of automated testing across levels: Unit testing (JUnit, Mockito)...",
+    "Relevant": false
+  },
+  {
+    "Title": "Principal Oracle Platform Engineer",
+    "Company": "Mastercard",
+    "Location": "Ireland",
+    "Snippet": "...potential. Title and Summary Principal Oracle Platform Engineer Principal Platform Engineer (Database) Location: Dublin, Ireland (Hybrid) Level: Principal / Lead Focus: 70% Architecture & Design | 30% Engineering & Implementation Role Overview We are...",
+    "Relevant": false
+  },
+  {
+    "Title": "Senior Software Engineer",
+    "Company": "Mastercard",
+    "Location": "Ireland",
+    "Snippet": "...Overview The Mastercard Fraud Scoring and Analytics Platform team in Dublin have an exciting opportunity to hire a Senior Java Software Engineer. Our team is responsible for designing and developing new capabilities and frameworks on the MasterCard Fraud Management...",
+    "Relevant": true
+  },
+  {
+    "Title": "Senior Software Engineer in Test",
+    "Company": "Mastercard",
+    "Location": "Ireland",
+    "Snippet": "...offerings globally. The Mastercard Consumer Data Management team in Dublin is looking for Senior Software Engineer to drive our consumer... ...role involves working with a team of talented and experienced developers to develop high performance, low latency, highly scalable Java...",
+    "Relevant": true
+  },
+  {
+    "Title": "Senior Software Engineer",
+    "Company": "Mastercard",
+    "Location": "Ireland",
+    "Snippet": "..., providing input from a quality and reliability perspective Develop and execute unit, functional, integration, and end-to-end tests... ...growing autonomy and reliability Ability to contribute to team- level engineering improvements and mentoring Preferred / Good to...",
+    "Relevant": false
+  },
+  {
+    "Title": "Principal Software Engineer",
+    "Company": "Mastercard",
+    "Location": "Ireland",
+    "Snippet": "...Skills Broad experience as a Software Engineer / Full Stack Developer. Hands on experience implementing design patterns and using... ...retrospection and continually improve as a result. Must have expert level knowledge of software development processes and be an...",
+    "Relevant": false
+  },
+  {
+    "Title": "Full Stack Software Engineer II - React and Java",
+    "Company": "Mastercard",
+    "Location": "Ireland",
+    "Snippet": "...development, you should also have a good understanding of back-end technologies, enabling effective collaboration with back-end developers and integration of APIs and services. Role Design and develop dynamic, user-friendly, and responsive user interfaces using...",
+    "Relevant": false
+  },
+  {
+    "Title": "AI engineer II",
+    "Company": "Mastercard",
+    "Location": "Ireland",
+    "Snippet": "...operation of applied AI solutions. This role is ideal for someone early in their AI engineering career who has moved beyond junior- level work and is ready to take on independent delivery ownership with guidance from senior engineers. You will work closely with AI...",
+    "Relevant": false
+  },
+  {
+    "Title": "Product Applications Engineer",
+    "Company": "Analog Devices",
+    "Location": "Ireland",
+    "Snippet": "...products into their designs. You will provide innovative, practical, and timely solutions to customer issues while developing a comprehensive system- level understanding of application segments. In this role, you'll work collaboratively within cross-discipline teams to bring...",
+    "Relevant": false
+  },
+  {
+    "Title": "Site Reliability Engineer - xAI Technical Operations",
+    "Company": "xAI",
+    "Location": "Ireland",
+    "Snippet": "...production infrastructure supporting AI workloads. Location Work will be in-office based out of either Palo Alto, California or Dublin, Ireland. Required Qualifications A minimum of 8 years of software, systems or reliability engineering experience....",
+    "Relevant": false
+  },
+  {
+    "Title": "Manager, Software Engineering",
+    "Company": "Mastercard",
+    "Location": "Ireland",
+    "Snippet": "...Engineering Overview The Mastercard Fraud Platform team in Dublin have an exciting opportunity to hire a Software Development... ...help grow an existing team that will be working on designing and developing new capabilities on the Mastercard Fraud Management Platform. The...",
+    "Relevant": false
+  },
+  {
+    "Title": "Director, Platform Engineering (vmware)",
+    "Company": "Mastercard",
+    "Location": "Ireland",
+    "Snippet": "...responsibility for our global virtualization engineering team and developing and executing our virtualization roadmap. You will focus on... ...platform resilency • Assist with major operational incidents where level 3 engineering is required All About You The ideal...",
+    "Relevant": false
+  },
+  {
+    "Title": "Director, Site Reliability Engineering",
+    "Company": "Mastercard",
+    "Location": "Ireland",
+    "Snippet": "...looking for a Director of Site Reliability Engineering to join our Dublin Tech Hub. As part of a global team this role will focus on... ...obserbability/monitoring or operational resilency • Mentor engineers and develop a strong SRE mindset across our operations All About You...",
+    "Relevant": false
+  },
+  {
+    "Title": "Lead, SRE Engineer",
+    "Company": "Mastercard",
+    "Location": "Ireland",
+    "Snippet": "...compatibility issues between software and infrastructure emerge, develop and implement strategies to remediate or mitigate risks.... ...tools such as SolarWinds and NetScout. • Proficiency in packet level debugging, including capturing traffic with tools like tcpdump and...",
+    "Relevant": false
+  },
+  {
+    "Title": "Senior Platform Engineer - Linux",
+    "Company": "Mastercard",
+    "Location": "Ireland",
+    "Snippet": "...support of technical hardware and software expertise in support of MasterCard Linux Operating systems and platforms. This is a senior- level IT support position, with the expectation that the candidate has the advance Linux skills and knowledge with the ability to learn...",
+    "Relevant": false
+  },
+  {
+    "Title": "Lead SRE Network Engineer",
+    "Company": "Mastercard",
+    "Location": "Ireland",
+    "Snippet": "...compatibility issues between software and infrastructure emerge, develop and implement strategies to remediate or mitigate risks.... ..., financial services, or large scale SaaS platforms. • Expert- level understanding of TCP/IP networking, including LAN and WAN architectures...",
+    "Relevant": false
+  },
+  {
+    "Title": "Senior Software Engineer",
+    "Company": "Mastercard",
+    "Location": "Ireland",
+    "Snippet": "...while ensuring alignment with Mastercard's standards for security, performance, and reliability. Role & Responsibilities Design, develop, and deliver AI-powered solutions leveraging modern architectures, including LLM-based systems and retrieval-augmented generation (...",
+    "Relevant": false
+  },
+  {
+    "Title": "Senior Software Engineer II, Flywheel Foundations",
+    "Company": "HubSpot",
+    "Location": "Ireland",
+    "Snippet": "...systems for storing, processing, and retrieving high-volume GTM data (e.g., contact history, CRM activity, behavioral signals). Develop scalable data processing and streaming solutions to support AI-driven use cases. Create reusable platform capabilities and APIs...",
+    "Relevant": true
+  },
+  {
+    "Title": "Software Engineer II",
+    "Company": "Mastercard",
+    "Location": "Ireland",
+    "Snippet": "...- Test Automation/Java We are looking for a Software Engineer – Test Automation (Java) with 3+ years of experience to join the Developer Experience team, responsible for the Mastercard Developers portal and related tools used by developers globally. This is a hands...",
+    "Relevant": false
+  },
+  {
+    "Title": "Director of AI Engineering",
+    "Company": "Mastercard",
+    "Location": "Ireland",
+    "Snippet": "...responsible for driving the practical application of transformer‑based and generative AI capabilities—ensuring models are effectively developed, adapted, and deployed to solve real business problems. You will lead a team working at the intersection of model development...",
+    "Relevant": false
+  },
+  {
+    "Title": "Lead Network Engineer-2",
+    "Company": "Mastercard",
+    "Location": "Ireland",
+    "Snippet": "...Process Improvement & Mentorship • Mentor and guide Network Operations Engineers on troubleshooting techniques and best practices. • Develop and maintain troubleshooting runbooks, knowledge articles, and standard operating procedures. • Identify recurring issues and...",
+    "Relevant": false
+  },
+  {
+    "Title": "Lead AI engineer",
+    "Company": "Mastercard",
+    "Location": "Ireland",
+    "Snippet": "Our Purpose Mastercard powers economies and empowers people in 200+ countries and territories worldwide. Together with our customers, we're helping build a sustainable economy where everyone can prosper. We support a wide range of digital payments choices, making transactions...",
+    "Relevant": false
+  },
+  {
+    "Title": "Software Development Engineer II - Data and Analytics",
+    "Company": "Mastercard",
+    "Location": "Ireland",
+    "Snippet": "...shape the future growth of our team. Position Responsibilities: At Mastercard Services, you will work with talented teams to develop cutting-edge, analytics-driven products that help businesses worldwide seize the most value from their data. As a Software Development...",
+    "Relevant": true
+  },
+  {
+    "Title": "Manager, Software Engineering",
+    "Company": "Mastercard",
+    "Location": "Ireland",
+    "Snippet": ".... A Manager position at MasterCard requires hybrid skills that involves knowledge of software development & quality engineering to develop a resilient software product that is testable in close to fully automated manner. Additionally, role requires experience of managing...",
+    "Relevant": false
+  },
+  {
+    "Title": "Director of Software Engineering",
+    "Company": "Mastercard",
+    "Location": "Ireland",
+    "Snippet": "...Manage delivery across multiple workstreams, ensuring alignment to program priorities, timelines, and quality expectations Build and develop a high‑performing engineering team, including hiring, coaching, and performance management Act as a key stakeholder partner,...",
+    "Relevant": false
+  },
+  {
+    "Title": "Site Reliability Engineer I-1",
+    "Company": "Mastercard",
+    "Location": "Ireland",
+    "Snippet": "...business operations is to be the production readiness steward for the platform. This is accomplished by closely partnering with developers to design, build, implement, and support technology services. A business operations engineer will ensure operational criteria like...",
+    "Relevant": false
+  },
+  {
+    "Title": "Lead Software Engineer - Distributed Microservices Platform",
+    "Company": "Mastercard",
+    "Location": "Ireland",
+    "Snippet": "Our Purpose Mastercard powers economies and empowers people in 200+ countries and territories worldwide. Together with our customers, we're helping build a sustainable economy where everyone can prosper. We support a wide range of digital payments choices, making transactions...",
+    "Relevant": false
+  },
+  {
+    "Title": "SR Azure Database Engineer",
+    "Company": "Mastercard",
+    "Location": "Ireland",
+    "Snippet": "Our Purpose Mastercard powers economies and empowers people in 200+ countries and territories worldwide. Together with our customers, we're helping build a sustainable economy where everyone can prosper. We support a wide range of digital payments choices, making transactions...",
+    "Relevant": false
+  },
+  {
+    "Title": "Lead Platform Engineer - AWS Cloud DevOps Engineer",
+    "Company": "Mastercard",
+    "Location": "Ireland",
+    "Snippet": "...Gateway, and Control Tower. • Build and manage infrastructure using CloudFormation/CDK(TypeScript), with fluency in Python. • Develop CI/CD pipelines using tools like Jenkins, BitBucket/GitHub, Artifactory, and Sonarqube. • Drive platform reliability and scalability...",
+    "Relevant": false
+  },
+  {
+    "Title": "Engineering Manager I",
+    "Company": "SmartSpace Global",
+    "Location": "Ireland",
+    "Snippet": "...can all thrive. The Opportunity The Engineering Manager will lead a cross-functional... ...years' experience leading engineers across backend and frontend projects ~ Background in... ...global technology company, with offices in Ireland, the US, and the UK. Poppulo is an...",
+    "Relevant": false
+  },
+  {
+    "Title": "Software Development Engineer in Test (SDET)",
+    "Company": "Ministry Brands",
+    "Location": "Ireland",
+    "Snippet": "...and innovation? We're looking for a talented Software Development Engineer in Test (SDET) to join our growing engineering team. In this... ...Design, build, and maintain automated test frameworks using C#, Python, and/or TypeScript. Implement and maintain automated...",
+    "Relevant": false
+  },
+  {
+    "Title": "Lead Software Engineer",
+    "Company": "Mastercard",
+    "Location": "Ireland",
+    "Snippet": "...realize their greatest potential. Title and Summary Lead Software Engineer Overview The Program Modernization team at MasterCard... ...proficiency in Python, with experience building scalable backend systems Experience with Angular or similar frontend frameworks...",
+    "Relevant": false
+  }
 ]

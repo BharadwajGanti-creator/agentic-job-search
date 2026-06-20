@@ -11,7 +11,7 @@ public static class Eval
         string target = "Backend / Software Engineer (SDE) roles in Dublin, Ireland. " +
                         "Open to .NET, C#, and backend positions at mid level.";
 
-        var jobs = golden.Select(g => new Job(g.Title, g.Company, g.Location, "", "")).ToList();
+        var jobs = golden.Select(g => new Job(g.Title, g.Company, g.Location, "", g.Snippet)).ToList();
         var scores = await new JobMatcher().ScoreJobsAsync(profile, target, jobs);
         var scoreByIndex = scores.Where(s => s.Index >= 0 && s.Index < jobs.Count)
                                  .ToDictionary(s => s.Index, s => s.FitScore);

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Agentic Job Search — Trace</title>
+<style>
+  :root { --bg:#0f1115; --card:#181b22; --line:#262b36; --txt:#e6e9ef; --mut:#9aa3b2;
+          --good:#2ecc71; --mid:#f1c40f; --low:#7f8896; --accent:#4f8cff; }
+  * { box-sizing:border-box; }
+  body { margin:0; font:15px/1.5 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+         background:var(--bg); color:var(--txt); }
+  .wrap { max-width:860px; margin:0 auto; padding:32px 20px 64px; }
+  h1 { font-size:22px; margin:0 0 4px; }
+  .sub { color:var(--mut); margin:0 0 24px; }
+  button { background:var(--accent); color:#fff; border:0; border-radius:8px;
+           padding:11px 18px; font-size:15px; font-weight:600; cursor:pointer; }
+  button:disabled { opacity:.55; cursor:default; }
+  .status { color:var(--mut); margin:16px 0; min-height:20px; }
+  .section { margin-top:28px; }
+  .section h2 { font-size:13px; text-transform:uppercase; letter-spacing:.06em;
+                color:var(--mut); margin:0 0 10px; }
+  .pill { display:inline-block; background:var(--card); border:1px solid var(--line);
+          border-radius:999px; padding:5px 12px; margin:0 8px 8px 0; font-size:13px; }
+  .counts { color:var(--mut); }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px;
+          padding:14px 16px; margin-bottom:10px; }
+  .card .top { display:flex; align-items:baseline; gap:10px; }
+  .score { font-weight:700; min-width:34px; }
+  .s-good{color:var(--good);} .s-mid{color:var(--mid);} .s-low{color:var(--low);}
+  .title { font-weight:600; }
+  .meta { color:var(--mut); font-size:13px; margin:2px 0 8px; }
+  .why { font-size:14px; }
+  .miss { color:var(--mut); font-size:13px; margin-top:4px; }
+  .why b, .miss b { color:var(--txt); }
+  a { color:var(--accent); text-decoration:none; font-size:13px; }
+  .err { color:#ff6b6b; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Agentic Job Search</h1>
+    <p class="sub">Watch the agent plan, fetch, and score roles.</p>
+    <button id="run">Run search</button>
+    <div class="status" id="status"></div>
+    <div id="out"></div>
+  </div>
+<script>
+const btn = document.getElementById('run');
+const statusEl = document.getElementById('status');
+const out = document.getElementById('out');
+const band = s => s >= 60 ? 's-good' : s >= 40 ? 's-mid' : 's-low';
+const esc = t => (t ?? '').replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+
+btn.addEventListener('click', async () => {
+  btn.disabled = true; out.innerHTML = '';
+  statusEl.textContent = 'Planning queries → fetching jobs → scoring… a few seconds.';
+  try {
+    const res = await fetch('/api/search', { method: 'POST' });
+    const data = await res.json();
+    if (!res.ok || data.error) throw new Error(data.error || ('HTTP ' + res.status));
+    render(data); statusEl.textContent = '';
+  } catch (e) {
+    statusEl.innerHTML = '<span class="err">Run failed: ' + esc(e.message) + '</span>';
+  } finally { btn.disabled = false; }
+});
+
+function render(d){
+  const queries = (d.plannedQueries || []).map(q => '<span class="pill">' + esc(q) + '</span>').join('');
+  const ranked = (d.ranked || []).map(j => `
+    <div class="card">
+      <div class="top"><span class="score ${band(j.score)}">${j.score}</span>
+        <span class="title">${esc(j.title)}</span></div>
+      <div class="meta">${esc(j.company)} · ${esc(j.location)}</div>
+      <div class="why"><b>Why:</b> ${esc(j.reason)}</div>
+      <div class="miss"><b>Missing:</b> ${esc(j.missing)}</div>
+      ${j.link ? `<a href="${esc(j.link)}" target="_blank" rel="noopener">View posting →</a>` : ''}
+    </div>`).join('');
+  out.innerHTML = `
+    <div class="section"><h2>1 · Agent planned these queries</h2>${queries || '<span class="counts">none</span>'}</div>
+    <div class="section"><h2>2 · Fetched</h2>
+      <div class="counts">${d.fetched} results · ${d.unique} unique after dedupe</div></div>
+    <div class="section"><h2>3 · Scored &amp; ranked (${(d.ranked || []).length})</h2>
+      ${ranked || '<div class="counts">no jobs scored</div>'}</div>`;
+}
+async function loadLatest(){
+  try {
+    const res = await fetch('latest_matches.json', { cache: 'no-store' });
+    if (!res.ok) return;                       // no scheduled run yet — just show the button
+    const data = await res.json();
+    render(data);
+    if (data.generatedAtUtc)
+      statusEl.textContent = 'Latest scheduled run: ' + data.generatedAtUtc + ' UTC. Click Run for a fresh one.';
+  } catch {}
+}
+loadLatest();
+</script>
+</body>
+</html>
