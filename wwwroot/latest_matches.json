@@ -1,29 +1,38 @@
 {
-  "generatedAtUtc": "2026-06-21 09:37:32Z",
+  "generatedAtUtc": "2026-06-22 11:37:32Z",
   "plannedQueries": [
     "Mid-level .NET Developer Dublin",
     "C# Backend Engineer Ireland",
     "Software Engineer .NET Core Dublin"
   ],
   "fetched": 75,
-  "unique": 40,
+  "unique": 42,
   "ranked": [
+    {
+      "title": "Senior Software Engineer",
+      "company": "Mastercard",
+      "location": "Ireland",
+      "link": "https://jooble.org/jdp/-3324640708781157791",
+      "score": 85,
+      "reason": "This is a Senior Software Engineer role focused on developing new capabilities and frameworks on a fraud management platform, aligning with backend development.",
+      "missing": "none"
+    },
+    {
+      "title": "Senior Software Engineer",
+      "company": "Mastercard",
+      "location": "Ireland",
+      "link": "https://jooble.org/jdp/-5178815275352734479",
+      "score": 85,
+      "reason": "This is a Senior Software Engineer role focused on developing new capabilities for a Decision Management Platform, which is a backend development role.",
+      "missing": "none"
+    },
     {
       "title": "Senior Software Engineer",
       "company": "Mastercard",
       "location": "Ireland",
       "link": "https://jooble.org/jdp/6842071732250701179",
       "score": 85,
-      "reason": "This is a Senior Software Engineer role focused on building scalable systems, which aligns well with the candidate\u0027s backend experience, though the candidate is mid-level.",
-      "missing": "none"
-    },
-    {
-      "title": "Senior Software Engineer II, Flywheel Foundations",
-      "company": "HubSpot",
-      "location": "Ireland",
-      "link": "https://jooble.org/jdp/3850488520864171306",
-      "score": 85,
-      "reason": "This is a Senior Software Engineer role focused on developing scalable data processing and streaming solutions, aligning well with backend experience, though the candidate is mid-level.",
+      "reason": "This is a Senior Software Engineer role focused on designing and building scalable systems, aligning with backend development.",
       "missing": "none"
     },
     {
@@ -32,7 +41,16 @@
       "location": "Ireland",
       "link": "https://jooble.org/jdp/1849731508192649582",
       "score": 85,
-      "reason": "This is a Senior Software Engineer role focused on AI-powered solutions and modern architectures, aligning well with backend experience, though the candidate is mid-level.",
+      "reason": "This is a Senior Software Engineer role focused on designing, developing, and delivering AI-powered solutions, which involves backend development.",
+      "missing": "none"
+    },
+    {
+      "title": "Senior Software Engineer II, Flywheel Foundations",
+      "company": "HubSpot",
+      "location": "Ireland",
+      "link": "https://jooble.org/jdp/3850488520864171306",
+      "score": 85,
+      "reason": "This is a Senior Software Engineer II role focused on developing scalable data processing and streaming solutions and creating platform capabilities and APIs, aligning with backend development.",
       "missing": "none"
     },
     {
@@ -41,16 +59,7 @@
       "location": "Ireland",
       "link": "https://jooble.org/jdp/5043236213790478370",
       "score": 85,
-      "reason": "This is a Senior AI Engineer role, which involves building and operating AI systems with strong engineering rigor, aligning with backend experience, though the candidate is mid-level.",
-      "missing": "none"
-    },
-    {
-      "title": "Software Engineer II",
-      "company": "Mastercard",
-      "location": "Ireland",
-      "link": "https://jooble.org/jdp/6378245566946659524",
-      "score": 80,
-      "reason": "This is a Software Engineer II role with strong programming skills in backend languages, a good fit for a mid-level candidate.",
+      "reason": "This is a Senior AI Engineer role that involves developing and contributing to AI and agentic systems across the full lifecycle, which includes backend development.",
       "missing": "none"
     },
     {
@@ -58,35 +67,26 @@
       "company": "Mastercard",
       "location": "Ireland",
       "link": "https://jooble.org/jdp/-4106592499655961824",
+      "score": 85,
+      "reason": "This is a Software Development Engineer II - Data and Analytics role that involves contributing to APIs and backend systems, aligning with backend development.",
+      "missing": "none"
+    },
+    {
+      "title": "Software Engineer I\u200BI",
+      "company": "Mastercard",
+      "location": "Ireland",
+      "link": "https://jooble.org/jdp/-2353207240147044243",
       "score": 80,
-      "reason": "This is a Software Development Engineer II - Data and Analytics role, contributing to APIs and backend systems, a good fit for a mid-level candidate.",
+      "reason": "This is a Software Engineer II role that involves developing applications and services, fitting a mid-level backend focus.",
       "missing": "none"
     },
     {
-      "title": "Senior Software Engineer",
+      "title": "Software Engineer II",
       "company": "Mastercard",
       "location": "Ireland",
-      "link": "https://jooble.org/jdp/-3324640708781157791",
-      "score": 75,
-      "reason": "This is a Senior Software Engineer role focused on backend development, which aligns with the candidate\u0027s experience, though the candidate is mid-level.",
-      "missing": "none"
-    },
-    {
-      "title": "Senior Software Engineer",
-      "company": "Mastercard",
-      "location": "Ireland",
-      "link": "https://jooble.org/jdp/3002897879674933244",
-      "score": 75,
-      "reason": "This is a Senior Software Engineer role focused on backend development, aligning with the candidate\u0027s experience, though the candidate is mid-level.",
-      "missing": "none"
-    },
-    {
-      "title": "Senior Software Engineer",
-      "company": "Mastercard",
-      "location": "Ireland",
-      "link": "https://jooble.org/jdp/-5178815275352734479",
-      "score": 75,
-      "reason": "This is a Senior Software Engineer role focused on backend development, aligning with the candidate\u0027s experience, though the candidate is mid-level.",
+      "link": "https://jooble.org/jdp/-5486658940854427779",
+      "score": 80,
+      "reason": "This is a Software Engineer II role that involves backend service testing and validating RESTful APIs, fitting a mid-level backend focus.",
       "missing": "none"
     },
     {
@@ -94,8 +94,17 @@
       "company": "Mastercard",
       "location": "Ireland",
       "link": "https://jooble.org/jdp/-1510456617535539701",
+      "score": 75,
+      "reason": "This is a Full Stack Software Engineer II role that requires understanding of back-end technologies and integration of APIs and services, fitting a mid-level backend focus.",
+      "missing": "none"
+    },
+    {
+      "title": "Senior Software Engineer",
+      "company": "Mastercard",
+      "location": "Ireland",
+      "link": "https://jooble.org/jdp/3002897879674933244",
       "score": 70,
-      "reason": "This is a Full Stack Software Engineer II role, which is a good fit for backend experience, though it also includes frontend.",
+      "reason": "This is a Senior Software Engineer role that involves contributing to team-level engineering improvements, though it also mentions testing responsibilities.",
       "missing": "none"
     },
     {
@@ -120,18 +129,9 @@
       "title": "Software Engineer II",
       "company": "Mastercard",
       "location": "Ireland",
-      "link": "https://jooble.org/jdp/-4120620214688917625",
-      "score": 20,
-      "reason": "This is a Software Engineer II - Test Automation role, which is focused on testing.",
-      "missing": "none"
-    },
-    {
-      "title": "Software Engineer II",
-      "company": "Mastercard",
-      "location": "Ireland",
       "link": "https://jooble.org/jdp/6758701445493558347",
       "score": 20,
-      "reason": "This is a Software Engineer - Test Automation role, which is focused on testing.",
+      "reason": "This is a Software Engineer \u2013 Test Automation role, focused on testing rather than general backend development.",
       "missing": "none"
     },
     {
@@ -140,7 +140,16 @@
       "location": "Ireland",
       "link": "https://jooble.org/jdp/1671168121796102342",
       "score": 20,
-      "reason": "This is a Software Development Engineer in Test (SDET) role, which is focused on testing.",
+      "reason": "This is a Software Development Engineer in Test (SDET) role, focused on testing rather than general backend development.",
+      "missing": "none"
+    },
+    {
+      "title": "Software Engineer II",
+      "company": "Mastercard",
+      "location": "Ireland",
+      "link": "https://jooble.org/jdp/-4120620214688917625",
+      "score": 20,
+      "reason": "This is a Software Engineer II role where a core responsibility is QA tasks, indicating a focus on testing rather than general backend development.",
       "missing": "none"
     },
     {
@@ -149,7 +158,7 @@
       "location": "Ireland",
       "link": "https://jooble.org/jdp/1271168748856582000",
       "score": 10,
-      "reason": "This is a Principal Platform Engineer role, which is above the mid-level seniority and focused on Oracle platforms.",
+      "reason": "This is a Principal Platform Engineer role focused on Oracle databases, which is a specialized infrastructure role, not general backend development.",
       "missing": "none"
     },
     {
@@ -158,16 +167,16 @@
       "location": "Ireland",
       "link": "https://jooble.org/jdp/4432588395603292121",
       "score": 10,
-      "reason": "This is a Principal Software Engineer role, which is above the mid-level seniority.",
+      "reason": "This is a Principal Software Engineer role, which is above the mid-level seniority requested.",
       "missing": "none"
     },
     {
       "title": "Lead Software Engineer",
       "company": "Mastercard",
       "location": "Ireland",
-      "link": "https://jooble.org/jdp/-5585352659814185791",
+      "link": "https://jooble.org/jdp/-8517231488675971129",
       "score": 10,
-      "reason": "This is a Lead Software Engineer role, which is above the mid-level seniority.",
+      "reason": "This is a Lead Software Engineer role, which is above the mid-level seniority requested.",
       "missing": "none"
     },
     {
@@ -176,7 +185,7 @@
       "location": "Ireland",
       "link": "https://jooble.org/jdp/-2599437712436364916",
       "score": 10,
-      "reason": "This is an AI Engineer role, which is a specialist role and not general backend engineering.",
+      "reason": "This is an AI Engineer role, which is a specialized discipline outside of general backend engineering.",
       "missing": "none"
     },
     {
@@ -185,43 +194,7 @@
       "location": "Ireland",
       "link": "https://jooble.org/jdp/-6012297881056445140",
       "score": 10,
-      "reason": "This is a Product Applications Engineer role, which is a specialist role focused on hardware/application integration.",
-      "missing": "none"
-    },
-    {
-      "title": "Site Reliability Engineer - xAI Technical Operations",
-      "company": "xAI",
-      "location": "Ireland",
-      "link": "https://jooble.org/jdp/-1331908085686470780",
-      "score": 10,
-      "reason": "This is a Site Reliability Engineer role, which is infrastructure/operations focused.",
-      "missing": "none"
-    },
-    {
-      "title": "Lead, SRE Engineer",
-      "company": "Mastercard",
-      "location": "Ireland",
-      "link": "https://jooble.org/jdp/4870348008344486468",
-      "score": 10,
-      "reason": "This is a Lead SRE Engineer role, which is infrastructure/operations focused and above mid-level.",
-      "missing": "none"
-    },
-    {
-      "title": "Site Reliability Lead Engineer",
-      "company": "Mastercard",
-      "location": "Ireland",
-      "link": "https://jooble.org/jdp/-6336126050113980820",
-      "score": 10,
-      "reason": "This is a Site Reliability Lead Engineer role, which is infrastructure/operations focused and above mid-level.",
-      "missing": "none"
-    },
-    {
-      "title": "Director, Platform Engineering (vmware)",
-      "company": "Mastercard",
-      "location": "Ireland",
-      "link": "https://jooble.org/jdp/-7508612889269564114",
-      "score": 10,
-      "reason": "This is a Director, Platform Engineering role, which is management and infrastructure focused.",
+      "reason": "This is a Product Applications Engineer role, which is a specialized role focused on customer solutions and system-level understanding, not general backend development.",
       "missing": "none"
     },
     {
@@ -230,16 +203,7 @@
       "location": "Ireland",
       "link": "https://jooble.org/jdp/-7765050841560537459",
       "score": 10,
-      "reason": "This is a Senior Platform Engineer - Linux role, which is infrastructure/operations focused.",
-      "missing": "none"
-    },
-    {
-      "title": "Lead SRE Network Engineer",
-      "company": "Mastercard",
-      "location": "Ireland",
-      "link": "https://jooble.org/jdp/6896287787260788595",
-      "score": 10,
-      "reason": "This is a Lead SRE Network Engineer role, which is infrastructure/operations focused and above mid-level.",
+      "reason": "This is a Senior Platform Engineer - Linux role, which is focused on infrastructure support rather than general backend application development.",
       "missing": "none"
     },
     {
@@ -248,7 +212,7 @@
       "location": "Ireland",
       "link": "https://jooble.org/jdp/-3801043045352209174",
       "score": 10,
-      "reason": "This is a Lead Software Engineer role, which is above the mid-level seniority.",
+      "reason": "This is a Lead Software Engineer role, which is above the mid-level seniority requested.",
       "missing": "none"
     },
     {
@@ -257,7 +221,7 @@
       "location": "Ireland",
       "link": "https://jooble.org/jdp/-1349599432125592471",
       "score": 10,
-      "reason": "This is a Principal Software Engineer role, which is above the mid-level seniority.",
+      "reason": "This is a Principal Software Engineer role, which is above the mid-level seniority requested.",
       "missing": "none"
     },
     {
@@ -266,7 +230,7 @@
       "location": "Ireland",
       "link": "https://jooble.org/jdp/3663584347824233183",
       "score": 10,
-      "reason": "This is a Lead Software Engineer role, which is above the mid-level seniority.",
+      "reason": "This is a Lead Software Engineer role, which is above the mid-level seniority requested.",
       "missing": "none"
     },
     {
@@ -275,16 +239,16 @@
       "location": "Ireland",
       "link": "https://jooble.org/jdp/5165010463356389726",
       "score": 10,
-      "reason": "This is a Lead Software Engineer role, which is above the mid-level seniority.",
+      "reason": "This is a Lead Software Engineer role, which is above the mid-level seniority requested.",
       "missing": "none"
     },
     {
-      "title": "Lead Network Engineer-2",
+      "title": "Lead Software Engineer",
       "company": "Mastercard",
       "location": "Ireland",
-      "link": "https://jooble.org/jdp/-1023769659208529324",
+      "link": "https://jooble.org/jdp/-5167081771517719328",
       "score": 10,
-      "reason": "This is a Lead Network Engineer role, which is infrastructure focused and above mid-level.",
+      "reason": "This is a Lead Software Engineer role, which is above the mid-level seniority requested.",
       "missing": "none"
     },
     {
@@ -306,6 +270,15 @@
       "missing": "none"
     },
     {
+      "title": "Site Reliability Engineer - xAI Technical Operations",
+      "company": "xAI",
+      "location": "Ireland",
+      "link": "https://jooble.org/jdp/-1331908085686470780",
+      "score": 0,
+      "reason": "This is a Site Reliability Engineer role, which falls under infrastructure/operations.",
+      "missing": "none"
+    },
+    {
       "title": "Director, Software Engineering",
       "company": "Mastercard",
       "location": "Ireland",
@@ -315,12 +288,39 @@
       "missing": "none"
     },
     {
+      "title": "Lead, SRE Engineer",
+      "company": "Mastercard",
+      "location": "Ireland",
+      "link": "https://jooble.org/jdp/4870348008344486468",
+      "score": 0,
+      "reason": "This is a Lead SRE Engineer role, which is a management/lead position in infrastructure/operations.",
+      "missing": "none"
+    },
+    {
+      "title": "Site Reliability Lead Engineer",
+      "company": "Mastercard",
+      "location": "Ireland",
+      "link": "https://jooble.org/jdp/-6336126050113980820",
+      "score": 0,
+      "reason": "This is a Site Reliability Lead Engineer role, which is a lead position in infrastructure/operations.",
+      "missing": "none"
+    },
+    {
       "title": "Director, Site Reliability Engineering",
       "company": "Mastercard",
       "location": "Ireland",
       "link": "https://jooble.org/jdp/4352665861147255255",
       "score": 0,
-      "reason": "This is a Director of Site Reliability Engineering role, which is a management position and infrastructure/operations focused.",
+      "reason": "This is a Director of Site Reliability Engineering role, which is a management position in infrastructure/operations.",
+      "missing": "none"
+    },
+    {
+      "title": "Director, Platform Engineering (vmware)",
+      "company": "Mastercard",
+      "location": "Ireland",
+      "link": "https://jooble.org/jdp/-7508612889269564114",
+      "score": 0,
+      "reason": "This is a Director, Platform Engineering role, which is a management position focused on infrastructure.",
       "missing": "none"
     },
     {
@@ -329,7 +329,16 @@
       "location": "Ireland",
       "link": "https://jooble.org/jdp/-931663637062933718",
       "score": 0,
-      "reason": "This is a Director, Site Reliability Engineering role, which is a management position and infrastructure/operations focused.",
+      "reason": "This is a Director, Site Reliability Engineering role, which is a management position in infrastructure/operations.",
+      "missing": "none"
+    },
+    {
+      "title": "Lead SRE Network Engineer",
+      "company": "Mastercard",
+      "location": "Ireland",
+      "link": "https://jooble.org/jdp/6896287787260788595",
+      "score": 0,
+      "reason": "This is a Lead SRE Network Engineer role, which is a lead position in infrastructure/operations.",
       "missing": "none"
     },
     {
@@ -360,12 +369,21 @@
       "missing": "none"
     },
     {
+      "title": "Lead Network Engineer-2",
+      "company": "Mastercard",
+      "location": "Ireland",
+      "link": "https://jooble.org/jdp/-1023769659208529324",
+      "score": 0,
+      "reason": "This is a Lead Network Engineer role, which is a lead position focused on infrastructure/networking.",
+      "missing": "none"
+    },
+    {
       "title": "Director of AI Engineering",
       "company": "Mastercard",
       "location": "Ireland",
       "link": "https://jooble.org/jdp/3861856760296187364",
       "score": 0,
-      "reason": "This is a Director of AI Engineering role, which is a management position and specialist role.",
+      "reason": "This is a Director of AI Engineering role, which is a management position.",
       "missing": "none"
     }
   ]
