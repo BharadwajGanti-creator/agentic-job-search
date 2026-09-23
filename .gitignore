@@ -482,3 +482,4 @@ $RECYCLE.BIN/
 *.swp
 resume.pdf
 resume_profile.jsonscripts/.secrets.env
+scripts/.secrets.env
