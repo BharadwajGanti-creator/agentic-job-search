@@ -61,7 +61,7 @@ var app = builder.Build();
 
 app.UseDefaultFiles();   // serves wwwroot/index.html at "/"
 app.UseStaticFiles();
-
+app.MapGet("/health", () => Results.Ok());
 app.MapPost("/api/search", async () =>
 {
     try
