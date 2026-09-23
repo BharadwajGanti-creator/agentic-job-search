@@ -481,4 +481,4 @@ $RECYCLE.BIN/
 # Vim temporary swap files
 *.swp
 resume.pdf
-resume_profile.json
+resume_profile.jsonscripts/.secrets.env
