@@ -1,0 +1,11 @@
+.git
+.github
+bin/
+obj/
+scripts/
+infra/
+k8s/
+*.md
+resume_profile.json
+wwwroot/latest_matches.json
+jobs_dump.json
