@@ -483,3 +483,4 @@ $RECYCLE.BIN/
 resume.pdf
 resume_profile.json
 scripts/.secrets.env
+scripts/resume_profile.local.json
