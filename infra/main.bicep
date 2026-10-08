@@ -6,6 +6,9 @@ param rgLocation string = 'uksouth'
 @description('Real Azure region every actual resource lives in.')
 param resourceLocation string = 'swedencentral'
 
+@description('Microsoft Entra group object ID used for AKS administrative access.')
+param aksAdminGroupObjectId string
+
 param acrName string = 'bgdevopsacr2026'
 param aksName string = 'eurojobagent-aks'
 param keyVaultName string = 'devops-track-kv2026'   // check global availability before first apply
@@ -23,6 +26,7 @@ module resources 'modules/resources.bicep' = {
     acrName: acrName
     aksName: aksName
     keyVaultName: keyVaultName
+    aksAdminGroupObjectId: aksAdminGroupObjectId
   }
 }
 

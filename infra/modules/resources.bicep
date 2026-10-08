@@ -2,6 +2,7 @@ param location string
 param acrName string
 param aksName string
 param keyVaultName string
+param aksAdminGroupObjectId string
 
 // ---------- ACR (adopting bgdevopsacr2026) ----------
 resource acr 'Microsoft.ContainerRegistry/registries@2023-07-01' = {
@@ -35,6 +36,14 @@ resource aks 'Microsoft.ContainerService/managedClusters@2024-05-01' = {
     kubernetesVersion: '1.35'
     nodeResourceGroup: 'MC_devops-track-rg_eurojobagent-aks_swedencentral'
     enableRBAC: true
+    aadProfile: {
+    managed: true
+    enableAzureRBAC: true
+    adminGroupObjectIDs: [
+      aksAdminGroupObjectId
+    ]
+    tenantID: subscription().tenantId
+  }
     supportPlan: 'KubernetesOfficial'
     autoUpgradeProfile: {
       nodeOSUpgradeChannel: 'NodeImage'
