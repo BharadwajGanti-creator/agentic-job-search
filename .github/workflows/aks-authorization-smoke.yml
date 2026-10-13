@@ -1,0 +1,83 @@
+name: AKS authorization boundary experiment
+
+on:
+  workflow_dispatch:
+
+jobs:
+  authorization-boundary:
+    name: Namespace-scoped AKS authorization is enforced
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Login to Azure using GitHub OIDC
+        uses: azure/login@v3
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Require AKS to be intentionally running
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          POWER_STATE="$(az aks show             --resource-group devops-track-rg             --name eurojobagent-aks             --query 'powerState.code'             --output tsv)"
+
+          echo "AKS power state: ${POWER_STATE}"
+
+          if [ "${POWER_STATE}" != "Running" ]; then
+            echo "ERROR: eurojobagent-aks is not running."
+            echo "This workflow will not start the cluster automatically because cost control is intentional."
+            exit 1
+          fi
+
+      - name: Install kubelogin
+        uses: azure/use-kubelogin@v1
+        with:
+          kubelogin-version: 'v0.2.20'
+
+      - name: Obtain non-admin AKS context
+        uses: azure/aks-set-context@v5
+        with:
+          resource-group: devops-track-rg
+          cluster-name: eurojobagent-aks
+          admin: 'false'
+          use-kubelogin: 'true'
+
+      - name: Prove namespace authorization boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          TARGET_NAMESPACE="agentic-job-search"
+          CONTROL_NAMESPACE="default"
+
+          echo "Checking the same write permission in two namespaces."
+          echo "Expected: ${TARGET_NAMESPACE} => yes"
+          echo "Expected: ${CONTROL_NAMESPACE} => no"
+
+          TARGET_RESULT="$(kubectl auth can-i create deployments.apps             --namespace "${TARGET_NAMESPACE}" 2>&1 || true)"
+
+          CONTROL_RESULT="$(kubectl auth can-i create deployments.apps             --namespace "${CONTROL_NAMESPACE}" 2>&1 || true)"
+
+          echo "${TARGET_NAMESPACE}: ${TARGET_RESULT}"
+          echo "${CONTROL_NAMESPACE}: ${CONTROL_RESULT}"
+
+          if [ "${TARGET_RESULT}" != "yes" ]; then
+            echo "ERROR: GitHub identity is not authorized to create Deployments in ${TARGET_NAMESPACE}."
+            echo "Authentication may have succeeded, but the expected namespace-scoped Azure RBAC authorization is missing or ineffective."
+            exit 1
+          fi
+
+          if [ "${CONTROL_RESULT}" != "no" ]; then
+            echo "ERROR: GitHub identity unexpectedly has Deployment write access in ${CONTROL_NAMESPACE}."
+            echo "The deployment identity is broader than the intended namespace-scoped least-privilege boundary."
+            exit 1
+          fi
+
+          echo "Authorization boundary verified:"
+          echo "OIDC/AKS authentication succeeded, write access is allowed only in the intended namespace, and equivalent access is denied in the control namespace."
