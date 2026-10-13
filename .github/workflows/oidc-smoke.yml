@@ -1,0 +1,64 @@
+name: Azure OIDC authentication experiment
+
+on:
+  workflow_dispatch:
+
+jobs:
+  happy-path:
+    name: OIDC authentication succeeds
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Login to Azure using GitHub OIDC
+        uses: azure/login@v3
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Prove Azure authentication
+        run: |
+          az account show \
+            --query '{subscription:name, tenant:tenantId}' \
+            --output json
+
+          az group show \
+            --name devops-track-rg \
+            --query '{name:name, location:location}' \
+            --output json
+
+          echo "OIDC authentication and Azure access verified."
+
+
+  expected-failure:
+    name: Missing OIDC permission is rejected
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Attempt Azure login without id-token permission
+        id: broken-login
+        continue-on-error: true
+        uses: azure/login@v3
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Assert authentication failed for the expected reason
+        if: always()
+        run: |
+          echo "azure/login outcome: ${{ steps.broken-login.outcome }}"
+
+          if [ "${{ steps.broken-login.outcome }}" != "failure" ]; then
+            echo "ERROR: login unexpectedly succeeded without id-token: write."
+            exit 1
+          fi
+
+          echo "Expected authentication failure observed."
