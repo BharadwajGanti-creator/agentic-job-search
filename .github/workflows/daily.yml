@@ -16,11 +16,6 @@ jobs:
         with:
           dotnet-version: '10.0.x'
 
-      - name: Write resume profile
-        env:
-          RESUME_PROFILE_JSON: ${{ secrets.RESUME_PROFILE_JSON }}
-        run: printf '%s' "$RESUME_PROFILE_JSON" > resume_profile.json
-
       - name: Login to Azure using GitHub OIDC
         uses: azure/login@v3
         with:
