@@ -26,12 +26,12 @@ jobs:
             --query '{subscription:name, tenant:tenantId}' \
             --output json
 
-          az group show \
-            --name devops-track-rg \
-            --query '{name:name, location:location}' \
+          az account get-access-token \
+            --resource https://management.azure.com/ \
+            --query '{expiresOn:expiresOn}' \
             --output json
 
-          echo "OIDC authentication and Azure access verified."
+          echo "OIDC authentication verified without relying on resource-group authorization."
 
 
   expected-failure:
