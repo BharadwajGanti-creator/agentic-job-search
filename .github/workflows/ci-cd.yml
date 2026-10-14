@@ -42,9 +42,10 @@ jobs:
         run: dotnet restore JobSearchAgent.csproj
 
       - name: Build
-        run: dotnet build JobSearchAgent.csproj \
-          --configuration Release \
-          --no-restore
+        run: |
+          dotnet build JobSearchAgent.csproj \
+            --configuration Release \
+            --no-restore
 
       - name: Login to Azure using GitHub OIDC
         uses: azure/login@v3
