@@ -4,7 +4,9 @@ on:
     - cron: '0 6 * * *'      # 06:00 UTC daily
   workflow_dispatch:          # manual trigger for testing
 permissions:
-  contents: write             # required to commit the JSON back
+  contents: write
+  id-token: write
+             # required to commit the JSON back
 jobs:
   run:
     runs-on: ubuntu-latest
@@ -19,11 +21,42 @@ jobs:
           RESUME_PROFILE_JSON: ${{ secrets.RESUME_PROFILE_JSON }}
         run: printf '%s' "$RESUME_PROFILE_JSON" > resume_profile.json
 
-      - name: Run agent
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          JOOBLE_API_KEY: ${{ secrets.JOOBLE_API_KEY }}
-        run: dotnet run -- cron
+      - name: Login to Azure using GitHub OIDC
+        uses: azure/login@v3
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Run agent using Key Vault secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          RESUME_PROFILE_JSON="$(az keyvault secret show \
+            --vault-name devops-track-kv2026 \
+            --name ResumeProfileJson \
+            --query value \
+            --output tsv)"
+
+          GEMINI_API_KEY="$(az keyvault secret show \
+            --vault-name devops-track-kv2026 \
+            --name GeminiApiKey \
+            --query value \
+            --output tsv)"
+
+          JOOBLE_API_KEY="$(az keyvault secret show \
+            --vault-name devops-track-kv2026 \
+            --name JoobleApiKey \
+            --query value \
+            --output tsv)"
+
+          printf '%s' "$RESUME_PROFILE_JSON" > resume_profile.json
+
+          export GEMINI_API_KEY
+          export JOOBLE_API_KEY
+
+          dotnet run -- cron
 
       - name: Commit results
         run: |
