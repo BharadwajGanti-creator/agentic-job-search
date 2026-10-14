@@ -57,26 +57,23 @@ jobs:
           CONTROL_NAMESPACE="default"
 
           echo "Checking the same write permission in two namespaces."
-          echo "Expected: ${TARGET_NAMESPACE} => yes"
-          echo "Expected: ${CONTROL_NAMESPACE} => no"
+          echo "Expected: ${TARGET_NAMESPACE} => allowed"
+          echo "Expected: ${CONTROL_NAMESPACE} => denied"
 
-          TARGET_RESULT="$(kubectl auth can-i create deployments.apps             --namespace "${TARGET_NAMESPACE}" 2>&1 || true)"
-
-          CONTROL_RESULT="$(kubectl auth can-i create deployments.apps             --namespace "${CONTROL_NAMESPACE}" 2>&1 || true)"
-
-          echo "${TARGET_NAMESPACE}: ${TARGET_RESULT}"
-          echo "${CONTROL_NAMESPACE}: ${CONTROL_RESULT}"
-
-          if [ "${TARGET_RESULT}" != "yes" ]; then
+          if kubectl auth can-i create deployments.apps             --namespace "${TARGET_NAMESPACE}"             --quiet >/dev/null 2>&1; then
+            echo "${TARGET_NAMESPACE}: allowed"
+          else
             echo "ERROR: GitHub identity is not authorized to create Deployments in ${TARGET_NAMESPACE}."
-            echo "Authentication may have succeeded, but the expected namespace-scoped Azure RBAC authorization is missing or ineffective."
+            echo "OIDC/AKS authentication succeeded, but the expected namespace-scoped Azure RBAC authorization is missing or ineffective."
             exit 1
           fi
 
-          if [ "${CONTROL_RESULT}" != "no" ]; then
+          if kubectl auth can-i create deployments.apps             --namespace "${CONTROL_NAMESPACE}"             --quiet >/dev/null 2>&1; then
             echo "ERROR: GitHub identity unexpectedly has Deployment write access in ${CONTROL_NAMESPACE}."
             echo "The deployment identity is broader than the intended namespace-scoped least-privilege boundary."
             exit 1
+          else
+            echo "${CONTROL_NAMESPACE}: denied as expected"
           fi
 
           echo "Authorization boundary verified:"
