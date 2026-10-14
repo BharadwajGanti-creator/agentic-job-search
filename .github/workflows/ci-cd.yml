@@ -1,0 +1,258 @@
+name: Build and deploy to AKS
+
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  RESOURCE_GROUP: devops-track-rg
+  AKS_CLUSTER: eurojobagent-aks
+
+  ACR_NAME: bgdevopsacr2026
+  ACR_LOGIN_SERVER: bgdevopsacr2026.azurecr.io
+
+  IMAGE_REPOSITORY: agentic-job-search
+
+  KEY_VAULT_NAME: devops-track-kv2026
+
+  K8S_NAMESPACE: agentic-job-search
+  K8S_SECRET_NAME: agentic-job-search-secrets
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore
+        run: dotnet restore JobSearchAgent.csproj
+
+      - name: Build
+        run: dotnet build JobSearchAgent.csproj \
+          --configuration Release \
+          --no-restore
+
+      - name: Login to Azure using GitHub OIDC
+        uses: azure/login@v3
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Require AKS to be intentionally running
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          POWER_STATE="$(az aks show \
+            --resource-group "$RESOURCE_GROUP" \
+            --name "$AKS_CLUSTER" \
+            --query 'powerState.code' \
+            --output tsv)"
+
+          echo "AKS power state: ${POWER_STATE}"
+
+          if [ "$POWER_STATE" != "Running" ]; then
+            echo "ERROR: AKS is not running."
+            echo "The pipeline will not automatically start paid compute."
+            exit 1
+          fi
+
+      - name: Login to ACR
+        run: |
+          az acr login --name "$ACR_NAME"
+
+      - name: Build immutable container image
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          IMAGE="${ACR_LOGIN_SERVER}/${IMAGE_REPOSITORY}:${GITHUB_SHA}"
+
+          echo "Building ${IMAGE}"
+
+          docker build \
+            --tag "$IMAGE" \
+            .
+
+      - name: Push immutable container image
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          IMAGE="${ACR_LOGIN_SERVER}/${IMAGE_REPOSITORY}:${GITHUB_SHA}"
+
+          docker push "$IMAGE"
+
+      - name: Install kubelogin
+        uses: azure/use-kubelogin@v1
+        with:
+          kubelogin-version: 'v0.2.20'
+
+      - name: Obtain non-admin AKS context
+        uses: azure/aks-set-context@v5
+        with:
+          resource-group: ${{ env.RESOURCE_GROUP }}
+          cluster-name: ${{ env.AKS_CLUSTER }}
+          admin: 'false'
+          use-kubelogin: 'true'
+
+      - name: Materialise Kubernetes Secret from Key Vault
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          TMP_DIR="$(mktemp -d)"
+          trap 'rm -rf "$TMP_DIR"' EXIT
+          chmod 700 "$TMP_DIR"
+
+          GEMINI_API_KEY="$(az keyvault secret show \
+            --vault-name "$KEY_VAULT_NAME" \
+            --name GeminiApiKey \
+            --query value \
+            --output tsv)"
+
+          JOOBLE_API_KEY="$(az keyvault secret show \
+            --vault-name "$KEY_VAULT_NAME" \
+            --name JoobleApiKey \
+            --query value \
+            --output tsv)"
+
+          RESUME_PROFILE_JSON="$(az keyvault secret show \
+            --vault-name "$KEY_VAULT_NAME" \
+            --name ResumeProfileJson \
+            --query value \
+            --output tsv)"
+
+          printf '%s' "$GEMINI_API_KEY" \
+            > "$TMP_DIR/GEMINI_API_KEY"
+
+          printf '%s' "$JOOBLE_API_KEY" \
+            > "$TMP_DIR/JOOBLE_API_KEY"
+
+          printf '%s' "$RESUME_PROFILE_JSON" \
+            > "$TMP_DIR/RESUME_PROFILE_JSON"
+
+          unset GEMINI_API_KEY
+          unset JOOBLE_API_KEY
+          unset RESUME_PROFILE_JSON
+
+          kubectl \
+            --namespace "$K8S_NAMESPACE" \
+            create secret generic "$K8S_SECRET_NAME" \
+            --from-file=GEMINI_API_KEY="$TMP_DIR/GEMINI_API_KEY" \
+            --from-file=JOOBLE_API_KEY="$TMP_DIR/JOOBLE_API_KEY" \
+            --from-file=RESUME_PROFILE_JSON="$TMP_DIR/RESUME_PROFILE_JSON" \
+            --dry-run=client \
+            --output yaml \
+            | kubectl apply -f -
+
+          echo "Secret keys materialised:"
+          kubectl \
+            --namespace "$K8S_NAMESPACE" \
+            get secret "$K8S_SECRET_NAME" \
+            --output json \
+            | jq -r '.data | keys[]'
+
+      - name: Render immutable image into Kubernetes manifest
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          sed \
+            "s/IMAGE_TAG_PLACEHOLDER/${GITHUB_SHA}/g" \
+            k8s/agentic-job-search.yaml \
+            > /tmp/agentic-job-search.yaml
+
+          if grep -q 'IMAGE_TAG_PLACEHOLDER' \
+            /tmp/agentic-job-search.yaml; then
+            echo "ERROR: image tag placeholder was not replaced."
+            exit 1
+          fi
+
+      - name: Server-side deployment validation
+        run: |
+          kubectl apply \
+            --dry-run=server \
+            -f /tmp/agentic-job-search.yaml
+
+      - name: Deploy
+        run: |
+          kubectl apply \
+            -f /tmp/agentic-job-search.yaml
+
+      - name: Wait for rollout
+        run: |
+          kubectl rollout status \
+            deployment/agentic-job-search \
+            --namespace "$K8S_NAMESPACE" \
+            --timeout=180s
+
+      - name: Verify deployed image traceability
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          EXPECTED="${ACR_LOGIN_SERVER}/${IMAGE_REPOSITORY}:${GITHUB_SHA}"
+
+          ACTUAL="$(kubectl \
+            --namespace "$K8S_NAMESPACE" \
+            get deployment agentic-job-search \
+            --output jsonpath='{.spec.template.spec.containers[0].image}')"
+
+          echo "Expected image: ${EXPECTED}"
+          echo "Actual image:   ${ACTUAL}"
+
+          test "$EXPECTED" = "$ACTUAL"
+
+      - name: Verify health through ClusterIP Service
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          kubectl \
+            --namespace "$K8S_NAMESPACE" \
+            port-forward \
+            service/agentic-job-search \
+            18080:80 \
+            >/tmp/port-forward.log 2>&1 &
+
+          PF_PID=$!
+
+          cleanup() {
+            kill "$PF_PID" 2>/dev/null || true
+          }
+
+          trap cleanup EXIT
+
+          for attempt in $(seq 1 15); do
+            if curl \
+              --fail \
+              --silent \
+              http://127.0.0.1:18080/health \
+              >/dev/null; then
+
+              echo "Health check passed through Kubernetes Service."
+              exit 0
+            fi
+
+            sleep 2
+          done
+
+          echo "ERROR: health verification failed."
+          cat /tmp/port-forward.log
+          exit 1
