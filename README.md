@@ -55,11 +55,26 @@ Run the modes separately. The evaluation mode requires a populated, manually lab
 [`.github/workflows/daily.yml`](.github/workflows/daily.yml) schedules execution at **06:00 UTC** and permits manual runs. The workflow:
 
 1. Checks out the repository and installs .NET 10.
-2. Writes `resume_profile.json` from the `RESUME_PROFILE_JSON` GitHub Actions secret.
-3. Supplies `GEMINI_API_KEY` and `JOOBLE_API_KEY` to `dotnet run -- cron`.
-4. Commits changes to `wwwroot/latest_matches.json` when the output differs.
+2. Authenticates to Azure through GitHub OIDC; no Azure client secret is stored in the workflow.
+3. Reads `ResumeProfileJson`, `GeminiApiKey`, and `JoobleApiKey` from Azure Key Vault.
+4. Materialises `resume_profile.json` for the application process and exports the API keys only for the run.
+5. Executes `dotnet run -- cron`.
+6. Commits changes to `wwwroot/latest_matches.json` when the output differs.
 
-This is **GitHub Actions-based application automation**, not a Kubernetes deployment pipeline.
+Application secrets are therefore sourced from Azure Key Vault rather than duplicated as GitHub Actions application secrets.
+
+## Platform deployment and CI/CD
+
+The repository also contains the infrastructure and deployment work used for the current cloud/platform engineering track:
+
+- `infra/` contains Bicep that reconciles the existing Azure resource group, ACR and AKS cluster and provisions the Key Vault configuration used by the project.
+- `k8s/agentic-job-search.yaml` defines a namespace-scoped Deployment and ClusterIP Service with readiness/liveness probes on `GET /health`, resource requests/limits, and `envFrom.secretRef`.
+- `.github/workflows/oidc-smoke.yml` demonstrates GitHub-to-Azure OIDC authentication and deliberately verifies that authentication fails when `id-token: write` is omitted.
+- `.github/workflows/aks-authorization-smoke.yml` checks the Kubernetes authorization boundary: the deployment identity can perform the intended write operation in the `agentic-job-search` namespace and is denied the equivalent operation in `default`.
+- `.github/workflows/ci-cd.yml` restores/builds the .NET application, authenticates with OIDC, requires AKS to be intentionally running, builds and pushes an immutable `GITHUB_SHA`-tagged image to ACR, reads application secrets from Key Vault, creates/updates the Kubernetes Secret, validates and applies the manifest, waits for rollout, verifies the deployed image tag, and checks `/health` through the ClusterIP Service.
+- The deployment workflow deliberately refuses to start a stopped AKS cluster automatically; this keeps compute-cost activation an explicit operator decision.
+
+The design and trade-offs around health probes and runtime secret materialisation are recorded in [ADR-003](docs/adr-003-web-mode-health-and-secrets.md).
 
 ## Evaluation
 
@@ -84,7 +99,8 @@ Only use a local `.env` file containing the variables your configuration require
 - Scheduled runs overwrite `latest_matches.json`; the file is a latest-result snapshot rather than a historical job tracker.
 - Job search depends on external APIs and LLM responses, so failure handling and ranking quality require ongoing verification.
 - Evaluation metrics should be accompanied by a reproducible labelled data set and the date/model used for each reported run.
-- Deployment manifests, live service evidence and failure-injection results should be documented only after implementation and validation.
+- The current AKS environment is deliberately small personal-subscription infrastructure used for hands-on engineering practice, not a claim of years of production Kubernetes/SRE operation.
+- The deployment pipeline currently materialises a Kubernetes Secret from Azure Key Vault at deploy time; this is intentionally documented as a trade-off rather than equivalent to a native external-secrets integration.
 
 ## Relationship to EuroJobAgent
 
